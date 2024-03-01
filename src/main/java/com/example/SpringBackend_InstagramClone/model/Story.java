@@ -6,9 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -18,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Story {
     @Id
     @Column(name = "story_id")
-    private String storyId;
+    private Integer storyId;
 
     @Column(name = "user_id")
     private String userId;
@@ -32,11 +29,11 @@ public class Story {
     @Column(name = "storiescol")
     private String storiescol;
 
-    public String getStoryId() {
+    public Integer getStoryId() {
         return storyId;
     }
 
-    public void setStoryId(String storyId) {
+    public void setStoryId(Integer storyId) {
         this.storyId = storyId;
     }
 

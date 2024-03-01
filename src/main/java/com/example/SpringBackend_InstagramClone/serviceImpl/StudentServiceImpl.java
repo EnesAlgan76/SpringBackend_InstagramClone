@@ -22,7 +22,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public BaseResponse addStudent(StudentRequest studentRequest) {
+    public BaseResponse addStudent(StudentModel studentRequest) {
         BaseResponse baseResponse = new BaseResponse();
 
         try {

@@ -1,5 +1,6 @@
 package com.example.SpringBackend_InstagramClone.controller;
 
+import com.example.SpringBackend_InstagramClone.model.StudentModel;
 import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
 import com.example.SpringBackend_InstagramClone.request_response.StudentRequest;
 import com.example.SpringBackend_InstagramClone.service.StudentService;
@@ -20,10 +21,10 @@ public class StudentController {
     }
 
     @PostMapping("/addStudent")
-    public ResponseEntity<BaseResponse> addStudent(@RequestBody StudentRequest studentRequest){
+    public ResponseEntity<BaseResponse> addStudent(@RequestBody StudentModel studentModel){
         BaseResponse baseResponse = new BaseResponse();
         try {
-            baseResponse = studentService.addStudent(studentRequest);
+            baseResponse = studentService.addStudent(studentModel);
         } catch (Exception e) {
             e.printStackTrace();
         }
