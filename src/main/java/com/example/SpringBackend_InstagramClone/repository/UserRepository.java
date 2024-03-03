@@ -2,10 +2,39 @@ package com.example.SpringBackend_InstagramClone.repository;
 
 import com.example.SpringBackend_InstagramClone.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    @Query("SELECT u FROM User u WHERE u.userId = :id")
+    User findUserById(String id);
+
+    //register
+    @Query("SELECT EXISTS(SELECT 1 FROM User u WHERE u.userName = :userName OR u.phoneNumber = :phoneNumber)")
+    boolean checkUserNameAndTelExists(String userName, String phoneNumber);
+
     @Query("SELECT EXISTS(SELECT 1 FROM User u WHERE u.userName = :userName OR u.email = :email)")
-    boolean findByUserNameOrEmail(String userName, String email);
+    boolean checkUserNameAndEmailExists(String userName, String email);
+
+
+    //login
+
+    @Query("SELECT u FROM User u WHERE u.userName = :userName AND u.password = :password")
+    User findByUsernameAndPassword(@Param("userName") String userName, @Param("password") String password);
+
+    @Query("SELECT u FROM User u WHERE u.email = :email AND u.password = :password")
+    User findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+
+    @Query("SELECT u FROM User u WHERE u.phoneNumber = :phoneNumber AND u.password = :password")
+    User findByPhoneNumberAndPassword(@Param("phoneNumber") String phoneNumber, @Param("password") String password);
+
+
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.fcmToken = :newFcmToken WHERE u.userId = :userId")
+    int updateFcmToken(String userId, String newFcmToken);
 }

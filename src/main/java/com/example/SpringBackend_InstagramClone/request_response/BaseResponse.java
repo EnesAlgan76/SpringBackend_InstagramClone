@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class BaseResponse {
@@ -13,6 +12,13 @@ public class BaseResponse {
     private boolean status;
     private String message;
     private Object data;
+
+    public BaseResponse(boolean status, String message, Object data) {
+        this.status = status;
+        this.message = message;
+        this.data = data;
+    }
+
 
     public boolean isStatus() {
         return status;

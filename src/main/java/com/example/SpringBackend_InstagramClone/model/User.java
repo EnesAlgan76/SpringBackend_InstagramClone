@@ -12,11 +12,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 public class User {
     @Id
-    @Column(name = "user_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer id;
 
-    @Column(name = "full_name")
+    @Column(name = "userId")
+    private String userId;
+
+    @Column(name = "fullName")
     private String fullName;
 
     @Column(name = "userName")
@@ -28,23 +31,43 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "phone_number")
+    @Column(name = "phoneNumber")
     private String phoneNumber;
 
     @Column(name = "biography")
     private String biography;
 
-    @Column(name = "follower_count")
+    @Column(name = "followerCount")
     private Integer followerCount;
 
-    @Column(name = "following_count")
+    @Column(name = "followingCount")
     private Integer followingCount;
 
-    @Column(name = "post_count")
+    @Column(name = "postCount")
     private Integer postCount;
 
-    @Column(name = "profile_picture")
+    @Column(name = "profilePicture")
     private String profilePicture;
+
+    @Column(name = "fcmToken")
+    private String fcmToken;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
+    }
 
     public String getUserName() {
         return userName;
@@ -54,11 +77,11 @@ public class User {
         this.userName = userName;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
