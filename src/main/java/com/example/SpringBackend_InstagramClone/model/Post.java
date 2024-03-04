@@ -1,5 +1,6 @@
 package com.example.SpringBackend_InstagramClone.model;
 
+import com.example.SpringBackend_InstagramClone.utils.ConsolePrinter;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,24 +8,31 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 
-@Data
+//@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "posts")
 public class Post {
     @Id
-    @Column(name = "post_id")
+    @Column(name = "postId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer postId;
 
-    @Column(name = "user_id")
-    private String userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private User user;
 
     @Column(name = "content")
     private String content;
 
-    @Column(name = "creation_date")
+    @Column(name = "creationDate")
     private String creationDate;
+
+
+
+
+
 
     public Integer getPostId() {
         return postId;
@@ -34,12 +42,13 @@ public class Post {
         this.postId = postId;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        ConsolePrinter.printYellow("USER BİLGİSİ DE GETİRİLDİ");
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(User userId) {
+        this.user = userId;
     }
 
     public String getContent() {

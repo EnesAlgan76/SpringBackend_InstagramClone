@@ -5,6 +5,7 @@ import com.example.SpringBackend_InstagramClone.repository.UserRepository;
 import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
 import com.example.SpringBackend_InstagramClone.service.UserService;
 import com.example.SpringBackend_InstagramClone.utils.ConsolePrinter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -32,8 +34,8 @@ public class UserServiceImpl implements UserService {
                 System.out.println("***** BAŞARISIZ ***** USER BULUNAMADI :");
                 return null;
             }
-        } catch (Exception e) {
-            System.out.println("***** HATA *****:" + e.getMessage());
+        } catch (Throwable e) {
+            System.out.println("***** HATA *****:" + e);
             return null;
         }
     }
