@@ -4,7 +4,8 @@ import com.example.SpringBackend_InstagramClone.model.User;
 import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
 
 public interface UserService {
-    User getUserById(Integer userId);
+
+    BaseResponse getUserById(String userId);
 
     User createUser(User user);
 

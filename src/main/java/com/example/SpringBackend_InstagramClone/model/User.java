@@ -1,9 +1,7 @@
 package com.example.SpringBackend_InstagramClone.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.example.SpringBackend_InstagramClone.utils.ConsolePrinter;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -60,8 +58,12 @@ public class User {
     private String fcmToken;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    @JsonIgnore
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+//    @JsonIgnore
+//    private List<Post> postList;
+
+    @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Post> postList;
 
     public List<Post> getPostList() {

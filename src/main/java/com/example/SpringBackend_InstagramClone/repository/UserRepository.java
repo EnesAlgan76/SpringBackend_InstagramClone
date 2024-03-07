@@ -12,6 +12,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("SELECT u FROM User u WHERE u.userId = :id")
     User findUserById(String id);
 
+    @Query("SELECT u FROM User u WHERE u.userId = :id")
+    User findUserByIdWithoutPosts(@Param("id") String id);
+
+
+
+
     //register
     @Query("SELECT EXISTS(SELECT 1 FROM User u WHERE u.userName = :userName OR u.phoneNumber = :phoneNumber)")
     boolean checkUserNameAndTelExists(String userName, String phoneNumber);

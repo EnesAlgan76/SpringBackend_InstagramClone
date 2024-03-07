@@ -1,7 +1,8 @@
 package com.example.SpringBackend_InstagramClone.controller;
 
 
-import com.example.SpringBackend_InstagramClone.dto.PostDTO;
+import com.example.SpringBackend_InstagramClone.dto.PostUploadDTO;
+import com.example.SpringBackend_InstagramClone.model.Post;
 import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
 import com.example.SpringBackend_InstagramClone.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class PostController {
     }
 
     @PostMapping
-    public BaseResponse createPost(@RequestBody PostDTO post){
+    public BaseResponse createPost(@RequestBody PostUploadDTO post){
         try {
             return postService.createPost(post);
         }catch (Exception e){
@@ -29,9 +30,20 @@ public class PostController {
     }
 
 
-    @GetMapping("/post/{postId}")
-    public PostDTO getPostById(@PathVariable Integer postId){
-        return postService.getPostDTOById(postId);
+//    @GetMapping("postDto/{postId}")
+//    public PostUploadDTO getPostDtoById(@PathVariable Integer postId){
+//        return postService.getPostDTOById(postId);
+//    }
+
+
+    @GetMapping("post/{postId}")
+    public Post getPostById(@PathVariable Integer postId){
+        return postService.getPostById(postId);
+    }
+
+    @GetMapping("postHome/{postId}")
+    public BaseResponse getPostHomepageById(@PathVariable Integer postId){
+        return postService.getPostHomepageById(postId);
     }
 
 

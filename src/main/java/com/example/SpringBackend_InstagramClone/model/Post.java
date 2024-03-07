@@ -26,6 +26,9 @@ public class Post {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "likeCount")
+    private int likeCount;
+
     @Column(name = "creationDate")
     private String creationDate;
 
@@ -66,4 +69,5 @@ public class Post {
     public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
+
 }

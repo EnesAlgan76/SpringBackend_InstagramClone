@@ -6,10 +6,7 @@ import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
 import com.example.SpringBackend_InstagramClone.service.UserService;
 import com.example.SpringBackend_InstagramClone.utils.ConsolePrinter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 
 @Service
@@ -23,20 +20,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Integer userId) {
+    public BaseResponse getUserById(String userId) {
         try {
-            Optional<User> userModel = userRepository.findById(userId);
-            if (userModel.isPresent()) {
-                User user = userModel.get();
-                System.out.println("***** BAŞARILI ***** USER :" + user);
-                return user;
+            User userModel = userRepository.findUserByIdWithoutPosts(userId);
+            if (userModel != null) {
+                System.out.println("***** BAŞARILI ***** USER :" + userModel);
+                return new BaseResponse(true, "BAŞARILI", userModel );
             } else {
-                System.out.println("***** BAŞARISIZ ***** USER BULUNAMADI :");
-                return null;
+                return new BaseResponse(false, "USER BULUNAMADI", userModel );
             }
         } catch (Throwable e) {
-            System.out.println("***** HATA *****:" + e);
-            return null;
+            return new BaseResponse(false, "HATA", e );
         }
     }
 

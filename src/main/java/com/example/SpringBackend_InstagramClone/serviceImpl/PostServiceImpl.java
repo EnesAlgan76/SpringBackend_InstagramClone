@@ -1,7 +1,8 @@
 package com.example.SpringBackend_InstagramClone.serviceImpl;
 
+import com.example.SpringBackend_InstagramClone.dto.PostHomePageDto;
 import com.example.SpringBackend_InstagramClone.model.Post;
-import com.example.SpringBackend_InstagramClone.dto.PostDTO;
+import com.example.SpringBackend_InstagramClone.dto.PostUploadDTO;
 import com.example.SpringBackend_InstagramClone.model.User;
 import com.example.SpringBackend_InstagramClone.repository.PostRepository;
 import com.example.SpringBackend_InstagramClone.repository.UserRepository;
@@ -24,8 +25,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public BaseResponse createPost(PostDTO postDTO) {
-        String userIdString = postDTO.getUserId();
+    public BaseResponse createPost(PostUploadDTO postUploadDTO) {
+        String userIdString = postUploadDTO.getUserId();
         User user = userRepository.findUserById(userIdString);
         if (user == null) {
             return new BaseResponse(true,"USER Not FOUND..",null);
@@ -33,23 +34,35 @@ public class PostServiceImpl implements PostService {
             ConsolePrinter.printYellow("USER FOUND..");
             Post post = new Post();
             post.setUser(user);
-            post.setContent(postDTO.getContent());
-            post.setCreationDate(postDTO.getCreationDate());
+            post.setContent(postUploadDTO.getContent());
+            post.setCreationDate(postUploadDTO.getCreationDate());
             postRepository.save(post);
             return new BaseResponse(true,"Post Uploaded",null);
         }
     }
 
+//    @Override
+//    public PostUploadDTO getPostDTOById(Integer postId) {
+//        return postRepository.findPostDTOById(postId);
+//    }
+
+
     @Override
-    public PostDTO getPostDTOById(Integer postId) {
-        return postRepository.findPostDTOById(postId);
+    public Post getPostById(Integer postId) {
+        return postRepository.getPostById(postId);
+    }
+
+    @Override
+    public BaseResponse getPostHomepageById(Integer postId) {
+        PostHomePageDto post = postRepository.getPostHomePageById(postId);
+        ConsolePrinter.printYellow("User getirildi 11");
+        if (post == null) {
+            return new BaseResponse(false, "No post with id", null);
+        }
+        return new BaseResponse(true, "Succesfull", post);
     }
 
 
-//    @Override
-//    public Post getPostById2(Integer postId) {
-//        return postRepository.getPostById(postId);
-//    }
 
 
 
