@@ -19,6 +19,8 @@ public class PostController {
         this.postService = postService;
     }
 
+
+
     @PostMapping
     public BaseResponse createPost(@RequestBody PostUploadDTO post){
         try {

@@ -14,30 +14,40 @@ import jakarta.persistence.*;
 @Table(name = "followers")
 public class Follower {
 
-
     @Id
-    @Column(name = "follower_user_id")
-    private Integer followerUserId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Id
-    @Column(name = "following_user_id")
-    private String followingUserId;
+    @ManyToOne
+    @JoinColumn(name = "follower_id" , referencedColumnName = "userId")
+    private User follower;
+
+    @ManyToOne
+    @JoinColumn(name = "followed_id", referencedColumnName = "userId")
+    private User followed;
 
 
-
-    public Integer getFollowerUserId() {
-        return followerUserId;
+    public Long getId() {
+        return id;
     }
 
-    public void setFollowerUserId(Integer followerUserId) {
-        this.followerUserId = followerUserId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getFollowingUserId() {
-        return followingUserId;
+    public User getFollower() {
+        return follower;
     }
 
-    public void setFollowingUserId(String followingUserId) {
-        this.followingUserId = followingUserId;
+    public void setFollower(User follower) {
+        this.follower = follower;
+    }
+
+    public User getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(User followed) {
+        this.followed = followed;
     }
 }

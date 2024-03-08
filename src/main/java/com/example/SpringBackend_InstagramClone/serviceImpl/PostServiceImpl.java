@@ -39,6 +39,8 @@ public class PostServiceImpl implements PostService {
             postRepository.save(post);
             return new BaseResponse(true,"Post Uploaded",null);
         }
+
+
     }
 
 //    @Override
@@ -55,7 +57,6 @@ public class PostServiceImpl implements PostService {
     @Override
     public BaseResponse getPostHomepageById(Integer postId) {
         PostHomePageDto post = postRepository.getPostHomePageById(postId);
-        ConsolePrinter.printYellow("User getirildi 11");
         if (post == null) {
             return new BaseResponse(false, "No post with id", null);
         }
