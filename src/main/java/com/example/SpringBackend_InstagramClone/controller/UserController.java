@@ -8,8 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.stream.BaseStream;
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -22,15 +20,13 @@ public class UserController {
 
 
 
+
     @GetMapping("/user/{userId}")
-    public BaseResponse getUserWithPost(@PathVariable String userId) {
+    public BaseResponse getUserById(@PathVariable String userId) {
         return userService.getUserById(userId);
     }
 
-//    @GetMapping("/user/{userId}")
-//    public BaseResponse getUserWithPost(@PathVariable String userId) {
-//        return userService.getUserById(userId);
-//    }
+
 
 
 

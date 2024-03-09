@@ -62,11 +62,12 @@ public class User {
 //    @JsonIgnore
 //    private List<Post> postList;
 
-    @JsonIgnoreProperties("user")
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Post> postList;
+   @JsonIgnoreProperties("user")
+   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   private List<Post> postList;
 
     public List<Post> getPostList() {
+        ConsolePrinter.printYellow("Post listesi getirildi");
         return postList;
     }
 
@@ -83,6 +84,7 @@ public class User {
     }
 
     public String getFcmToken() {
+        ConsolePrinter.printYellow("fcm token getirildi");
         return fcmToken;
     }
 
@@ -91,6 +93,7 @@ public class User {
     }
 
     public String getUserName() {
+        ConsolePrinter.printYellow("Username listesi getirildi");
         return userName;
     }
 

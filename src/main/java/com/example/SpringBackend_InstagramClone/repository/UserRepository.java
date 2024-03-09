@@ -1,5 +1,6 @@
 package com.example.SpringBackend_InstagramClone.repository;
 
+import com.example.SpringBackend_InstagramClone.dto.UserDTO;
 import com.example.SpringBackend_InstagramClone.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -11,9 +12,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT u FROM User u WHERE u.userId = :id")
     User findUserById(String id);
-
-    @Query("SELECT u FROM User u WHERE u.userId = :id")
-    User findUserByIdWithoutPosts(@Param("id") String id);
 
 
 
@@ -43,4 +41,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Transactional
     @Query("UPDATE User u SET u.fcmToken = :newFcmToken WHERE u.userId = :userId")
     int updateFcmToken(String userId, String newFcmToken);
+
+
 }

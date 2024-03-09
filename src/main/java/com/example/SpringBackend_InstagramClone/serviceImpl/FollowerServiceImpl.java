@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserFollowerServiceImpl implements UserFollowerService {
+public class FollowerServiceImpl implements UserFollowerService {
     @Autowired
     UserFollowerRepository userFollowerRepository;
     @Autowired
@@ -59,7 +59,18 @@ public class UserFollowerServiceImpl implements UserFollowerService {
         }
     }
 
-
+    @Override
+    public BaseResponse checkFollowStatus(String followerId, String followedId) {
+        try {
+            if (userFollowerRepository.existsByFollower_UserIdAndFollowed_UserId(followerId, followedId)) {
+                return new BaseResponse(true, "Following", true);
+            }else {
+                return new BaseResponse(true, "Not Following", false);
+            }
+        } catch (Exception e) {
+            return new BaseResponse(false, "Error : "+e.getMessage(), null);
+        }
+    }
 
 
 }

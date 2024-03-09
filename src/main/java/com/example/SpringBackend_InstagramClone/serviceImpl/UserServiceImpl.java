@@ -1,5 +1,6 @@
 package com.example.SpringBackend_InstagramClone.serviceImpl;
 
+import com.example.SpringBackend_InstagramClone.dto.UserDTO;
 import com.example.SpringBackend_InstagramClone.model.User;
 import com.example.SpringBackend_InstagramClone.repository.UserRepository;
 import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
@@ -19,19 +20,32 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
+
     @Override
     public BaseResponse getUserById(String userId) {
-        try {
-            User userModel = userRepository.findUserByIdWithoutPosts(userId);
-            if (userModel != null) {
-                System.out.println("***** BAŞARILI ***** USER :" + userModel);
-                return new BaseResponse(true, "BAŞARILI", userModel );
-            } else {
-                return new BaseResponse(false, "USER BULUNAMADI", userModel );
-            }
-        } catch (Throwable e) {
-            return new BaseResponse(false, "HATA", e );
+        User user = userRepository.findUserById(userId);
+        if (user == null) {
+            return new BaseResponse(false, "No User With ıd: "+userId, null );
         }
+        return new BaseResponse(true, "BAŞARILI",  mapUserToDTO(user) );
+    }
+
+    private UserDTO mapUserToDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setUserId(user.getUserId());
+        userDTO.setFullName(user.getFullName());
+        userDTO.setUserName(user.getUserName());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPhoneNumber(user.getPhoneNumber());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setBiography(user.getBiography());
+        userDTO.setFollowerCount(user.getFollowerCount());
+        userDTO.setFollowingCount(user.getFollowingCount());
+        userDTO.setPostCount(user.getPostCount());
+        userDTO.setProfilePicture(user.getProfilePicture());
+        userDTO.setFcmToken(user.getFcmToken());
+        return userDTO;
     }
 
     @Override
@@ -87,6 +101,7 @@ public class UserServiceImpl implements UserService {
             return new BaseResponse(false,"Güncellenecek Kullanıcı Bulunamadı", null);
         }
     }
+
 
 
 

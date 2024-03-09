@@ -6,10 +6,7 @@ import com.example.SpringBackend_InstagramClone.service.UserFollowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/follow")
@@ -29,4 +26,13 @@ public class FollowController {
         BaseResponse response = userFollowerService.unfollowUser(followerId, followedId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+
+    @GetMapping("/checkFollowStatus")
+    public ResponseEntity<BaseResponse> checkFollow(@RequestParam String followerId, @RequestParam String followedId) {
+        BaseResponse response = userFollowerService.checkFollowStatus(followerId, followedId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
 }

@@ -26,6 +26,9 @@ public class Post {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "explanation")
+    private String explanation;
+
     @Column(name = "likeCount")
     private int likeCount;
 
@@ -33,9 +36,21 @@ public class Post {
     private String creationDate;
 
 
+    public String getExplanation() {
+        return explanation;
+    }
 
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
 
+    public int getLikeCount() {
+        return likeCount;
+    }
 
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
 
     public Integer getPostId() {
         return postId;

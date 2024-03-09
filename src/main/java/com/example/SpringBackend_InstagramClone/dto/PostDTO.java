@@ -1,17 +1,29 @@
 package com.example.SpringBackend_InstagramClone.dto;
 
-public class PostUploadDTO {
+public class PostDTO {
+    private int postId;
     private String userId;
     private String content;
+    private String explanation;
     private String creationDate;
     private int likeCount;
 
 
-    public PostUploadDTO(String userId, String content, String creationDate, int likeCount) {
+    public PostDTO(int postId, String userId, String content, String explanation, String creationDate, int likeCount) {
+        this.postId = postId;
         this.userId = userId;
         this.content = content;
+        this.explanation = explanation;
         this.creationDate = creationDate;
         this.likeCount = likeCount;
+    }
+
+    public int getPostId() {
+        return postId;
+    }
+
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
     public String getUserId() {
@@ -28,6 +40,14 @@ public class PostUploadDTO {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
     }
 
     public String getCreationDate() {

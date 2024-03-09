@@ -2,7 +2,7 @@ package com.example.SpringBackend_InstagramClone.serviceImpl;
 
 import com.example.SpringBackend_InstagramClone.dto.PostHomePageDto;
 import com.example.SpringBackend_InstagramClone.model.Post;
-import com.example.SpringBackend_InstagramClone.dto.PostUploadDTO;
+import com.example.SpringBackend_InstagramClone.dto.PostDTO;
 import com.example.SpringBackend_InstagramClone.model.User;
 import com.example.SpringBackend_InstagramClone.repository.PostRepository;
 import com.example.SpringBackend_InstagramClone.repository.UserRepository;
@@ -11,6 +11,8 @@ import com.example.SpringBackend_InstagramClone.service.PostService;
 import com.example.SpringBackend_InstagramClone.utils.ConsolePrinter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -25,8 +27,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public BaseResponse createPost(PostUploadDTO postUploadDTO) {
-        String userIdString = postUploadDTO.getUserId();
+    public BaseResponse createPost(PostDTO postDTO) {
+        String userIdString = postDTO.getUserId();
         User user = userRepository.findUserById(userIdString);
         if (user == null) {
             return new BaseResponse(true,"USER Not FOUND..",null);
@@ -34,8 +36,9 @@ public class PostServiceImpl implements PostService {
             ConsolePrinter.printYellow("USER FOUND..");
             Post post = new Post();
             post.setUser(user);
-            post.setContent(postUploadDTO.getContent());
-            post.setCreationDate(postUploadDTO.getCreationDate());
+            post.setContent(postDTO.getContent());
+            post.setCreationDate(postDTO.getCreationDate());
+            post.setExplanation(postDTO.getExplanation());
             postRepository.save(post);
             return new BaseResponse(true,"Post Uploaded",null);
         }
@@ -63,8 +66,11 @@ public class PostServiceImpl implements PostService {
         return new BaseResponse(true, "Succesfull", post);
     }
 
-
-
+    @Override
+    public BaseResponse getAllPostsByUserId(String userId) {
+        List<PostDTO> postDTOList = postRepository.getUserAllPost(userId);
+        return new BaseResponse(true,"All post from user: "+ userId, postDTOList);
+    }
 
 
 }

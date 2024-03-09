@@ -1,7 +1,7 @@
 package com.example.SpringBackend_InstagramClone.controller;
 
 
-import com.example.SpringBackend_InstagramClone.dto.PostUploadDTO;
+import com.example.SpringBackend_InstagramClone.dto.PostDTO;
 import com.example.SpringBackend_InstagramClone.model.Post;
 import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
 import com.example.SpringBackend_InstagramClone.service.PostService;
@@ -22,7 +22,7 @@ public class PostController {
 
 
     @PostMapping
-    public BaseResponse createPost(@RequestBody PostUploadDTO post){
+    public BaseResponse createPost(@RequestBody PostDTO post){
         try {
             return postService.createPost(post);
         }catch (Exception e){
@@ -30,12 +30,6 @@ public class PostController {
         }
 
     }
-
-
-//    @GetMapping("postDto/{postId}")
-//    public PostUploadDTO getPostDtoById(@PathVariable Integer postId){
-//        return postService.getPostDTOById(postId);
-//    }
 
 
     @GetMapping("post/{postId}")
@@ -46,6 +40,11 @@ public class PostController {
     @GetMapping("postHome/{postId}")
     public BaseResponse getPostHomepageById(@PathVariable Integer postId){
         return postService.getPostHomepageById(postId);
+    }
+
+    @GetMapping("/allposts/{userId}")
+    public BaseResponse getAllPostsByUserId(@PathVariable String userId) {
+        return postService.getAllPostsByUserId(userId);
     }
 
 

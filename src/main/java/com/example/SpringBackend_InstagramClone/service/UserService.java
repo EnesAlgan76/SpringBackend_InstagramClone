@@ -15,4 +15,5 @@ public interface UserService {
 
 
     BaseResponse updateFcmToken(String userId, String newFcmToken);
+
 }
