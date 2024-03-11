@@ -1,12 +1,16 @@
 package com.example.SpringBackend_InstagramClone.controller;
 
+import com.example.SpringBackend_InstagramClone.dto.FilterDTO;
 import com.example.SpringBackend_InstagramClone.model.User;
 import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
 import com.example.SpringBackend_InstagramClone.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -27,11 +31,8 @@ public class UserController {
     }
 
 
-
-
-
     @GetMapping("/checkUserExists") //http://localhost:8080/checkUserExists?userName=JohnDoe&email=johndoe@example.com&phoneNumber=05415345880"
-    public boolean  checkUserExists(
+    public boolean checkUserExists(
             @RequestParam(value = "userName", required = false) String userName,
             @RequestParam(value = "email", required = false) String email,
             @RequestParam(value = "phoneNumber", required = false) String phoneNumber
@@ -48,7 +49,7 @@ public class UserController {
 
 
 
-    @GetMapping("authenticateUser")
+    @GetMapping("/authenticateUser")
     public ResponseEntity<BaseResponse> authenticateUser(
             @RequestParam(value = "userNameOrTelOrMail") String userNameOrTelOrMail,
             @RequestParam(value = "password") String password
@@ -57,6 +58,13 @@ public class UserController {
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/searchUsersByUsername/{input}")  // kullanıcı adı girilen değeri içeren tüm kullanıcıları(SummaryDTO) getirir.
+    public BaseResponse searchUsersByUsername(@PathVariable String input) {
+        return new BaseResponse(true,"User list contains input :"+input, userService.searchUsersByUsername(input));
+    }
+
+
+
 
     @PutMapping("/updateFcmToken")
     public BaseResponse updateFcmToken(
@@ -64,6 +72,21 @@ public class UserController {
             @RequestParam(value = "userId") String userId
     ) {
         return userService.updateFcmToken(userId, newFcmToken);
+    }
+
+
+    @PostMapping("/users00")
+    public ResponseEntity<List<User>> getUsersByFilter(@RequestBody List<FilterDTO> filterDTOList) {
+        return ResponseEntity.ok().body(userService.getUsersByFilter(filterDTOList));
+    }
+
+
+    @PostMapping("/users01")
+    public ResponseEntity<Page<User>> getUsersByFilterWithPaggination(
+            @RequestBody List<FilterDTO> filterDTOList,
+            @RequestParam int page,
+            @RequestParam int size) {
+        return ResponseEntity.ok().body(userService.getUsersByFilterWithPaggination(filterDTOList,page,size));
     }
 
 

@@ -1,13 +1,23 @@
 package com.example.SpringBackend_InstagramClone.serviceImpl;
 
-import com.example.SpringBackend_InstagramClone.dto.UserDTO;
+import com.example.SpringBackend_InstagramClone.dto.FilterDTO;
+import com.example.SpringBackend_InstagramClone.dto.UserSummaryDTO;
+import com.example.SpringBackend_InstagramClone.dto.UserMapper;
 import com.example.SpringBackend_InstagramClone.model.User;
 import com.example.SpringBackend_InstagramClone.repository.UserRepository;
 import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
 import com.example.SpringBackend_InstagramClone.service.UserService;
 import com.example.SpringBackend_InstagramClone.utils.ConsolePrinter;
+import com.example.SpringBackend_InstagramClone.utils.UserSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -27,26 +37,19 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return new BaseResponse(false, "No User With ıd: "+userId, null );
         }
-        return new BaseResponse(true, "BAŞARILI",  mapUserToDTO(user) );
+        return new BaseResponse(true, "BAŞARILI", UserMapper.mapUserToDTO(user) );
     }
 
-    private UserDTO mapUserToDTO(User user) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(user.getId());
-        userDTO.setUserId(user.getUserId());
-        userDTO.setFullName(user.getFullName());
-        userDTO.setUserName(user.getUserName());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setPhoneNumber(user.getPhoneNumber());
-        userDTO.setPassword(user.getPassword());
-        userDTO.setBiography(user.getBiography());
-        userDTO.setFollowerCount(user.getFollowerCount());
-        userDTO.setFollowingCount(user.getFollowingCount());
-        userDTO.setPostCount(user.getPostCount());
-        userDTO.setProfilePicture(user.getProfilePicture());
-        userDTO.setFcmToken(user.getFcmToken());
-        return userDTO;
+
+    @Override
+    public List<UserSummaryDTO> searchUsersByUsername(String username) {
+        List<User> users = userRepository.findByUserNameStartingWith(username);
+        List<UserSummaryDTO> list =  users.stream().map(UserMapper::mapUserToListItemDTO)
+                .collect(Collectors.toList());
+        return list;
     }
+
+
 
     @Override
     public User createUser(User user) {
@@ -88,6 +91,23 @@ public class UserServiceImpl implements UserService {
 
     }
 
+
+    @Override
+    public List<User> getUsersByFilter(List<FilterDTO> filterDTOList) {
+        return userRepository.findAll(UserSpecification.columnEqual(filterDTOList));
+    }
+
+    @Override
+    public Page<User> getUsersByFilterWithPaggination(List<FilterDTO> filterDTOList, int page, int size) {
+        if(page < 1)
+            page = 1;
+
+        if(size < 1)
+            size = 10;
+
+        Pageable pageable = PageRequest.of(page-1, size, Sort.by("id").descending());
+        return userRepository.findAll(UserSpecification.columnEqual(filterDTOList),pageable);
+    }
 
 
 

@@ -93,7 +93,7 @@ public class User {
     }
 
     public String getUserName() {
-        ConsolePrinter.printYellow("Username listesi getirildi");
+        ConsolePrinter.printYellow("Username getirildi");
         return userName;
     }
 
@@ -118,6 +118,7 @@ public class User {
     }
 
     public String getPassword() {
+        ConsolePrinter.printYellow("Password getirildi");
         return password;
     }
 

@@ -39,6 +39,7 @@ public class PostServiceImpl implements PostService {
             post.setContent(postDTO.getContent());
             post.setCreationDate(postDTO.getCreationDate());
             post.setExplanation(postDTO.getExplanation());
+            post.setLikeCount(0);
             postRepository.save(post);
             return new BaseResponse(true,"Post Uploaded",null);
         }
