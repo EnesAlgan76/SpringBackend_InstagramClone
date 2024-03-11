@@ -122,7 +122,16 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public BaseResponse incrementPostCount(String userId) {
+        int updatedCount = userRepository.incrementPostCount(userId);
 
+        if(updatedCount>0){
+            return new BaseResponse(true,"Post Sayısı Güncellendi", null);
+        }else {
+            return new BaseResponse(false,"Güncellenecek Post için Kullanıcı Bulunamadı", null);
+        }
+    }
 
 
 }

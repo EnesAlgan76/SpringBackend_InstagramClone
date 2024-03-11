@@ -46,4 +46,9 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
 
 
     List<User> findByUserNameStartingWith(String username);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.postCount = u.postCount + 1 WHERE u.userId = :userId")
+    int incrementPostCount(@Param("userId") String userId);
 }

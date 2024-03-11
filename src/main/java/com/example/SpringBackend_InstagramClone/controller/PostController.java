@@ -23,12 +23,7 @@ public class PostController {
 
     @PostMapping
     public BaseResponse createPost(@RequestBody PostDTO post){
-        try {
-            postService.createPost(post);
-            return new BaseResponse(true,"Post Uploaded Succesfully",post);
-        }catch (Exception e){
-            return new BaseResponse(false,"ERROR",e.getMessage());
-        }
+        return postService.createPost(post);
 
     }
 

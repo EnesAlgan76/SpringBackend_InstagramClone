@@ -27,4 +27,5 @@ public interface UserService {
 
     BaseResponse updateFcmToken(String userId, String newFcmToken);
 
+    BaseResponse incrementPostCount(String userId);
 }

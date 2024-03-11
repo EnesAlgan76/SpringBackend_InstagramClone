@@ -74,6 +74,16 @@ public class UserController {
         return userService.updateFcmToken(userId, newFcmToken);
     }
 
+//    @PUT("users/updatePostCount")
+//    fun updatePostCount(@Query("userId") userId: String) : Call<BaseResponse>
+
+    @PutMapping("/incrementPostCount")
+    public BaseResponse incrementPostCount(
+            @RequestParam(value = "userId") String userId
+    ) {
+        return userService.incrementPostCount(userId);
+    }
+
 
     @PostMapping("/users00")
     public ResponseEntity<List<User>> getUsersByFilter(@RequestBody List<FilterDTO> filterDTOList) {
