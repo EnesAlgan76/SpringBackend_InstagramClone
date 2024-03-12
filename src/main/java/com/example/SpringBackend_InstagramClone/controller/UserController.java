@@ -84,6 +84,20 @@ public class UserController {
         return userService.incrementPostCount(userId);
     }
 
+    @GetMapping("/getFCMToken")
+    public BaseResponse getFCMToken(@RequestParam(value = "userId") String userId) {
+        BaseResponse response = userService.getFCMToken(userId);
+        if(response.isStatus()){
+            try {
+                return response;
+            } catch (Exception e) {
+                return new BaseResponse(false, "Bilinmeyen bir hata oluştu :"+e.getMessage(),response.getData());
+            }
+        }else {
+            return response;
+        }
+    }
+
 
     @PostMapping("/users00")
     public ResponseEntity<List<User>> getUsersByFilter(@RequestBody List<FilterDTO> filterDTOList) {
@@ -98,6 +112,9 @@ public class UserController {
             @RequestParam int size) {
         return ResponseEntity.ok().body(userService.getUsersByFilterWithPaggination(filterDTOList,page,size));
     }
+
+
+
 
 
 }

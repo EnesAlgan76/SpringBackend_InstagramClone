@@ -14,17 +14,62 @@ import jakarta.persistence.*;
 @Table(name = "notifications")
 public class Notification {
     @Id
-    @Column(name = "notification_id")
-    private Integer notificationId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    @Column(name = "user_id")
-    private String userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private User user;
 
-    @Column(name = "content")
-    private String content;
+    @Column(name = "type")
+    private String type;
 
-    @Column(name = "notification_date")
-    private String notificationDate;
+    @Column(name = "time")
+    private String time;
 
-    // Getters and setters
+    @Column(name = "post_preview")
+    private String postPreview;
+
+
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getPostPreview() {
+        return postPreview;
+    }
+
+    public void setPostPreview(String postPreview) {
+        this.postPreview = postPreview;
+    }
 }

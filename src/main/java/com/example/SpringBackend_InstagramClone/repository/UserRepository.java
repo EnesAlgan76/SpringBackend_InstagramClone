@@ -16,6 +16,10 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
     User findUserById(String id);
 
 
+    @Query("SELECT u.fcmToken FROM User u WHERE u.userId = :id")
+    String getFCMToken(String id);
+
+
 
 
     //register

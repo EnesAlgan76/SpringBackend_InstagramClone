@@ -6,6 +6,7 @@ import com.example.SpringBackend_InstagramClone.model.Post;
 import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
 import com.example.SpringBackend_InstagramClone.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,7 +25,6 @@ public class PostController {
     @PostMapping
     public BaseResponse createPost(@RequestBody PostDTO post){
         return postService.createPost(post);
-
     }
 
 

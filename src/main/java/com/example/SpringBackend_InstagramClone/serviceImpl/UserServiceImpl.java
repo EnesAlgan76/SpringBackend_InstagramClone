@@ -133,5 +133,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public BaseResponse getFCMToken(String userId) {
+        String fcmToken = userRepository.getFCMToken(userId);
+        if (fcmToken != null) {
+            return new BaseResponse(true, "Kullanıcı bulundu, token getiriliyor...", fcmToken);
+        }
+        return new BaseResponse(false, "No User or fcmToken With ıd: "+userId, null );
+    }
+
 
 }

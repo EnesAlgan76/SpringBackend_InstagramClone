@@ -1,5 +1,6 @@
 package com.example.SpringBackend_InstagramClone.dto;
 
+import com.example.SpringBackend_InstagramClone.model.Notification;
 import com.example.SpringBackend_InstagramClone.model.User;
 
 public class UserMapper {
@@ -31,5 +32,6 @@ public class UserMapper {
         userDTO.setProfilePicture(user.getProfilePicture());
         return userDTO;
     }
+
 
 }
