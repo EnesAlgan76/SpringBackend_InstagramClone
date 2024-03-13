@@ -3,42 +3,28 @@ package com.example.SpringBackend_InstagramClone.dto;
 public class NotificationDTO {
     private Integer id;
     private String userId;
-    private String profileImage;
-    private String userName;
     private String type;
     private String time;
     private String postPreview;
+    private String fromUserId;
+    private String fromUserProfilePicture;
+    private String fromUserName;
 
 
     public NotificationDTO() {
     }
 
-    public NotificationDTO(Integer id, String userId, String profileImage, String userName, String type, String time, String postPreview) {
+    public NotificationDTO(Integer id, String userId, String type, String time, String postPreview, String fromUserId, String fromUserProfilePicture, String fromUserName) {
         this.id = id;
         this.userId = userId;
-        this.profileImage = profileImage;
-        this.userName = userName;
         this.type = type;
         this.time = time;
         this.postPreview = postPreview;
+        this.fromUserId = fromUserId;
+        this.fromUserProfilePicture = fromUserProfilePicture;
+        this.fromUserName = fromUserName;
     }
 
-
-    public String getProfileImage() {
-        return profileImage;
-    }
-
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public Integer getId() {
         return id;
@@ -78,5 +64,29 @@ public class NotificationDTO {
 
     public void setPostPreview(String postPreview) {
         this.postPreview = postPreview;
+    }
+
+    public String getFromUserId() {
+        return fromUserId;
+    }
+
+    public void setFromUserId(String fromUserId) {
+        this.fromUserId = fromUserId;
+    }
+
+    public String getFromUserProfilePicture() {
+        return fromUserProfilePicture;
+    }
+
+    public void setFromUserProfilePicture(String fromUserProfilePicture) {
+        this.fromUserProfilePicture = fromUserProfilePicture;
+    }
+
+    public String getFromUserName() {
+        return fromUserName;
+    }
+
+    public void setFromUserName(String fromUserName) {
+        this.fromUserName = fromUserName;
     }
 }

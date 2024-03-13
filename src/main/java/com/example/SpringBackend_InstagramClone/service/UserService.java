@@ -30,4 +30,10 @@ public interface UserService {
     BaseResponse incrementPostCount(String userId);
 
     BaseResponse getFCMToken(String userId);
+
+
+    BaseResponse incrementFollowerCount(String userId);
+    BaseResponse incrementFollowCount(String userId);
+
+
 }

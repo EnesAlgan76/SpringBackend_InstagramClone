@@ -142,5 +142,25 @@ public class UserServiceImpl implements UserService {
         return new BaseResponse(false, "No User or fcmToken With ıd: "+userId, null );
     }
 
+    @Override
+    public BaseResponse incrementFollowerCount(String userId) {
+        try {
+            userRepository.incrementFollowerCount(userId);
+            return new BaseResponse(true, "Incremented follower count",null);
+        } catch (Exception e) {
+            return new BaseResponse(false, "Error: "+e.getMessage(),null);
+        }
+    }
+
+    @Override
+    public BaseResponse incrementFollowCount(String userId) {
+        try {
+            userRepository.incrementFollowingCount(userId);
+            return new BaseResponse(true, "Incremented following count",null);
+        } catch (Exception e) {
+            return new BaseResponse(false, "Error: "+e.getMessage(),null);
+        }
+    }
+
 
 }

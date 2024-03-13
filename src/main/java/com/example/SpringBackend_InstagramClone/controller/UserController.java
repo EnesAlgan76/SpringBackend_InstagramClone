@@ -99,6 +99,28 @@ public class UserController {
     }
 
 
+
+    @PutMapping("/incrementFollowerCount")
+    public ResponseEntity<BaseResponse> incrementFollowerCount(@RequestParam("userId") String userId) {
+        return new ResponseEntity<>(userService.incrementFollowerCount(userId), HttpStatus.OK);
+    }
+
+    @PutMapping("/incrementFollowCount")
+    public ResponseEntity<BaseResponse> incrementFollowCount(@RequestParam("userId") String userId) {
+        return new ResponseEntity<>(userService.incrementFollowCount(userId), HttpStatus.OK);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     @PostMapping("/users00")
     public ResponseEntity<List<User>> getUsersByFilter(@RequestBody List<FilterDTO> filterDTOList) {
         return ResponseEntity.ok().body(userService.getUsersByFilter(filterDTOList));

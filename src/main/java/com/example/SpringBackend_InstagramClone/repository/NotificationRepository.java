@@ -11,7 +11,7 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 
 
 
-    @Query("SELECT new com.example.SpringBackend_InstagramClone.dto.NotificationDTO(n.id, n.user.userId, n.user.profilePicture, n.user.userName, n.type, n.time, n.postPreview) FROM Notification n WHERE n.user.userId = :userId")
+    @Query("SELECT new com.example.SpringBackend_InstagramClone.dto.NotificationDTO(n.id, n.user.userId, n.type, n.time, n.postPreview, n.fromUserId, n.fromUserProfilePicture, n.fromUserName) FROM Notification n WHERE n.user.userId = :userId")
    List<NotificationDTO> getUserAllNotifications(String userId);
 
 }

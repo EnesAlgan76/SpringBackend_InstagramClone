@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -30,8 +30,39 @@ public class Notification {
     @Column(name = "post_preview")
     private String postPreview;
 
+    @Column(name = "fromUserId")
+    private String fromUserId;
+
+    @Column(name = "fromUserProfilePicture")
+    private String fromUserProfilePicture;
+
+    @Column(name = "fromUserName")
+    private String fromUserName;
 
 
+    public String getFromUserId() {
+        return fromUserId;
+    }
+
+    public void setFromUserId(String fromUserId) {
+        this.fromUserId = fromUserId;
+    }
+
+    public String getFromUserProfilePicture() {
+        return fromUserProfilePicture;
+    }
+
+    public void setFromUserProfilePicture(String fromUserProfilePicture) {
+        this.fromUserProfilePicture = fromUserProfilePicture;
+    }
+
+    public String getFromUserName() {
+        return fromUserName;
+    }
+
+    public void setFromUserName(String fromUserName) {
+        this.fromUserName = fromUserName;
+    }
 
     public Integer getId() {
         return id;

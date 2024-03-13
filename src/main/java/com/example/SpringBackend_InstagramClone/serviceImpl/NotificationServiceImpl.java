@@ -36,6 +36,9 @@ public class NotificationServiceImpl implements NotificationService {
             notification.setTime(notificationDTO.getTime());
             notification.setType(notificationDTO.getType());
             notification.setPostPreview(notificationDTO.getPostPreview());
+            notification.setFromUserId(notificationDTO.getFromUserId());
+            notification.setFromUserName(notificationDTO.getFromUserName());
+            notification.setFromUserProfilePicture(notificationDTO.getFromUserProfilePicture());
             notificationRepository.save(notification);
 
             return new BaseResponse(true,"SPRING addNotification: Notification added succesfully",notification);
@@ -50,6 +53,17 @@ public class NotificationServiceImpl implements NotificationService {
     public BaseResponse getAllNotificationsByUserId(String userId) {
        List<NotificationDTO> notificationList = notificationRepository.getUserAllNotifications(userId);
         return new BaseResponse(true,"All post from user: "+ userId, notificationList);
+    }
+
+    @Override
+    public BaseResponse deleteNotification(Integer notificationId) {
+        try {
+            notificationRepository.deleteById(notificationId);
+            return new BaseResponse(true,"Notification deleted successfully. Id: "+notificationId,null);
+        } catch (Exception e) {
+            return new BaseResponse(true,"Error while deleting. Error:"+e.getMessage(),null);
+        }
+
     }
 
 }

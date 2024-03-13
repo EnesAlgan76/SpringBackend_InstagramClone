@@ -34,4 +34,10 @@ public class NotificationController {
     public ResponseEntity<BaseResponse> getAllUserNotifications(@RequestParam(value = "userId") String userId){
         return new ResponseEntity<>(notificationService.getAllNotificationsByUserId(userId), HttpStatus.OK);
     }
+
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<BaseResponse> deleteNotification(@RequestParam(value = "notificationId") Integer notificationId) {
+        return new ResponseEntity<>(notificationService.deleteNotification(notificationId), HttpStatus.OK);
+    }
 }

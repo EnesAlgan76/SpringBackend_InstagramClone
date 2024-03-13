@@ -10,4 +10,6 @@ public interface UserFollowerService {
     BaseResponse unfollowUser(String followerId, String followedId);
 
     BaseResponse checkFollowStatus(String followerId, String followedId);
+
+
 }

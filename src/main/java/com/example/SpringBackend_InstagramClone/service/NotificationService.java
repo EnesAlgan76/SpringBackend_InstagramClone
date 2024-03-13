@@ -8,4 +8,6 @@ public interface NotificationService {
     BaseResponse addNotification(NotificationDTO notification);
 
     BaseResponse getAllNotificationsByUserId(String userId);
+
+    BaseResponse deleteNotification(Integer notificationId);
 }
