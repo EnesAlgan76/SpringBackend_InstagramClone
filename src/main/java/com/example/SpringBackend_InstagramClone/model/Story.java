@@ -14,11 +14,13 @@ import jakarta.persistence.*;
 @Table(name = "stories")
 public class Story {
     @Id
-    @Column(name = "story_id")
+    @Column(name = "storyId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer storyId;
 
-    @Column(name = "user_id")
-    private String userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private User user;
 
     @Column(name = "story_image")
     private String storyImage;
@@ -37,12 +39,12 @@ public class Story {
         this.storyId = storyId;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getStoryImage() {

@@ -13,4 +13,6 @@ public interface PostService {
     BaseResponse getPostHomepageById(Integer postId);
 
     BaseResponse getAllPostsByUserId(String userId);
+
+    BaseResponse getUserPostsHomePage(String userId);
 }

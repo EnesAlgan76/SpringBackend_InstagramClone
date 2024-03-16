@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -15,27 +15,43 @@ import jakarta.persistence.*;
 public class Like {
 
     @Id
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "likeId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer likeId;
 
-    @Column(name = "post_id")
-    private String postId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "postId", referencedColumnName = "postId")
+    private Post post;
 
 
 
-    public Integer getUserId() {
-        return userId;
+
+
+    public Integer getLikeId() {
+        return likeId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setLikeId(Integer likeId) {
+        this.likeId = likeId;
     }
 
-    public String getPostId() {
-        return postId;
+    public User getUser() {
+        return user;
     }
 
-    public void setPostId(String postId) {
-        this.postId = postId;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 }

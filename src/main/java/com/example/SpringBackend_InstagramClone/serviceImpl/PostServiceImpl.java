@@ -69,8 +69,24 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public BaseResponse getAllPostsByUserId(String userId) {
-        List<PostDTO> postDTOList = postRepository.getUserAllPost(userId);
-        return new BaseResponse(true,"All post from user: "+ userId, postDTOList);
+        List<PostDTO> postDTOList;
+        try {
+            postDTOList = postRepository.getUserAllPost(userId);
+            return new BaseResponse(true,"All post from user: "+ userId, postDTOList);
+        } catch (Exception e) {
+            return new BaseResponse(false,"Error getAllPostsByUserId ", null);
+        }
+    }
+
+    @Override
+    public BaseResponse getUserPostsHomePage(String userId) {
+        List<PostHomePageDto> postHomePageDtos;
+        try {
+            postHomePageDtos = postRepository.getUserPostsHomePage(userId);
+            return new BaseResponse(true,"All post from user: "+ userId, postHomePageDtos);
+        } catch (Exception e) {
+            return new BaseResponse(false,"Error getAllPostsByUserId ", null);
+        }
     }
 
 

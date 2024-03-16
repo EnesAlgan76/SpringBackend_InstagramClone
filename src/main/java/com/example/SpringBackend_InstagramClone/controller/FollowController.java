@@ -34,5 +34,10 @@ public class FollowController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("getFollowedUserIds/{userId}")
+    public ResponseEntity<BaseResponse> getUserPosts(@PathVariable String userId){
+        return new ResponseEntity<>(userFollowerService.getFollowedUserIds(userId),HttpStatus.OK);
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.SpringBackend_InstagramClone.serviceImpl;
 
+import com.example.SpringBackend_InstagramClone.dto.PostHomePageDto;
 import com.example.SpringBackend_InstagramClone.model.Follower;
 import com.example.SpringBackend_InstagramClone.model.User;
 import com.example.SpringBackend_InstagramClone.repository.UserFollowerRepository;
@@ -8,6 +9,8 @@ import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
 import com.example.SpringBackend_InstagramClone.service.UserFollowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FollowerServiceImpl implements UserFollowerService {
@@ -69,6 +72,18 @@ public class FollowerServiceImpl implements UserFollowerService {
             }
         } catch (Exception e) {
             return new BaseResponse(false, "Error : "+e.getMessage(), null);
+        }
+    }
+
+
+    @Override
+    public BaseResponse getFollowedUserIds(String userId) {
+        List<String> userIdList;
+        try {
+            userIdList = userFollowerRepository.getFollowedUserIds(userId);
+            return new BaseResponse(true,"All post from user: "+ userId, userIdList);
+        } catch (Exception e) {
+            return new BaseResponse(false,"Error getAllPostsByUserId ", null);
         }
     }
 

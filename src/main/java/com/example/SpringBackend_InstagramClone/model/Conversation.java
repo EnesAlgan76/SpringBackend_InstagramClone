@@ -14,42 +14,16 @@ import jakarta.persistence.*;
 @Table(name = "conversations")
 public class Conversation {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "conversation_id")
-    private Integer conversationId;
-
-    @Column(name = "sender_id")
-    private String senderId;
-
-    @Column(name = "receiver_id")
-    private String receiverId;
+    private Integer id;
 
     @Column(name = "last_message")
     private String lastMessage;
 
-    public Integer getConversationId() {
-        return conversationId;
-    }
 
-    public void setConversationId(Integer conversationId) {
-        this.conversationId = conversationId;
-    }
 
-    public String getSenderId() {
-        return senderId;
-    }
 
-    public void setSenderId(String senderId) {
-        this.senderId = senderId;
-    }
-
-    public String getReceiverId() {
-        return receiverId;
-    }
-
-    public void setReceiverId(String receiverId) {
-        this.receiverId = receiverId;
-    }
 
     public String getLastMessage() {
         return lastMessage;
@@ -57,5 +31,13 @@ public class Conversation {
 
     public void setLastMessage(String lastMessage) {
         this.lastMessage = lastMessage;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

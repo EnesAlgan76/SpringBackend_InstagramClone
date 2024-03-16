@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 //@Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,6 +36,13 @@ public class Post {
 
     @Column(name = "creationDate")
     private String creationDate;
+
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Like> likes;
 
 
     public String getExplanation() {

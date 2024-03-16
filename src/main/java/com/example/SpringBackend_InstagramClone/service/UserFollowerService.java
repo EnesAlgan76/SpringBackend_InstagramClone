@@ -12,4 +12,5 @@ public interface UserFollowerService {
     BaseResponse checkFollowStatus(String followerId, String followedId);
 
 
+    BaseResponse getFollowedUserIds(String userId);
 }

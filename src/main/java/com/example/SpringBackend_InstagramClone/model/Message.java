@@ -19,14 +19,13 @@ public class Message {
     @Column(name = "message_id")
     private Integer messageId;
 
-    @Column(name = "conversation_id")
-    private String conversationId;
+    @ManyToOne
+    @JoinColumn(name = "conversation_id")
+    private Conversation conversation;
 
-    @Column(name = "sender_id")
-    private String senderId;
-
-    @Column(name = "receiver_id")
-    private String receiverId;
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private User sender;
 
     @Column(name = "content")
     private String content;
@@ -45,30 +44,6 @@ public class Message {
         this.messageId = messageId;
     }
 
-    public String getConversationId() {
-        return conversationId;
-    }
-
-    public void setConversationId(String conversationId) {
-        this.conversationId = conversationId;
-    }
-
-    public String getSenderId() {
-        return senderId;
-    }
-
-    public void setSenderId(String senderId) {
-        this.senderId = senderId;
-    }
-
-    public String getReceiverId() {
-        return receiverId;
-    }
-
-    public void setReceiverId(String receiverId) {
-        this.receiverId = receiverId;
-    }
-
     public String getContent() {
         return content;
     }
@@ -83,6 +58,22 @@ public class Message {
 
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public Conversation getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(Conversation conversation) {
+        this.conversation = conversation;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 }
 

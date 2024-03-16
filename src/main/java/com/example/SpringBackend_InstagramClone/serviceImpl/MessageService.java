@@ -21,7 +21,7 @@ public class MessageService {
         return messageRepository.save(message);
     }
 
-    public List<Message> getAllMessagesByConversationId(String conversationId){
-        return messageRepository.findByConversationId(conversationId);
-    }
+//    public List<Message> getAllMessagesByConversationId(String conversationId){
+//        return messageRepository.findByConversationId(conversationId);
+//    }
 }

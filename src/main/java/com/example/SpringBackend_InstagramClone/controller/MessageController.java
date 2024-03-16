@@ -18,10 +18,10 @@ public class MessageController {
     }
 
 
-    @GetMapping("/conversation/{conversationId}") //localhost:8080/messages/conversation/conv1234
-    public List<Message> getAllMessagesByConversationId(@PathVariable String conversationId) {
-        return messageService.getAllMessagesByConversationId(conversationId);
-    }
+//    @GetMapping("/conversation/{conversationId}") //localhost:8080/messages/conversation/conv1234
+//    public List<Message> getAllMessagesByConversationId(@PathVariable String conversationId) {
+//        return messageService.getAllMessagesByConversationId(conversationId);
+//    }
 
     @PostMapping
     public Message createMessage(@RequestBody Message message){
