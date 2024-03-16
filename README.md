@@ -2,6 +2,12 @@
 
 This project is the backend component of an Instagram clone developed using Spring Boot. It serves as the API for the Instagram clone frontend, handling user authentication, post management, and other backend functionalities.
 
+## Frontend Project
+
+The frontend of this Instagram clone application is developed separately. You can find the frontend project on GitHub:
+
+[Kotlin Frontend Project](https://github.com/EnesAlgan76/Kotlin_InstagramClone)
+
 ## Application Overview
 <img src="images/overview.jpg" alt="Application Overview" height="400" />
 
