@@ -30,14 +30,24 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
+    @DeleteMapping("/user/{userId}")
+    public ResponseEntity<BaseResponse> deleteUserById(@PathVariable String userId) {
+        try {
+            userService.deleteUserById(userId);
+            return new ResponseEntity<>(new BaseResponse(true,"User deleted successfully", null), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false,"Error deleting user", null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @GetMapping("/checkUserExists") //http://localhost:8080/checkUserExists?userName=JohnDoe&email=johndoe@example.com&phoneNumber=05415345880"
     public boolean checkUserExists(
-            @RequestParam(value = "userName", required = false) String userName,
+            @RequestParam(value = "fullName", required = false) String fullName,
             @RequestParam(value = "email", required = false) String email,
-            @RequestParam(value = "phoneNumber", required = false) String phoneNumber
+            @RequestParam(value = "tel", required = false) String tel
     ) {
-        return userService.checkUserExists(userName, email, phoneNumber);
+        return userService.checkUserExists( fullName,  email,  tel);
     }
     
 

@@ -36,4 +36,5 @@ public interface UserService {
     BaseResponse incrementFollowCount(String userId);
 
 
+    void deleteUserById(String userId);
 }

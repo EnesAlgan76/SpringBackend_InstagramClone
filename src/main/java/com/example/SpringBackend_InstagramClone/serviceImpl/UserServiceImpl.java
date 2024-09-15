@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -72,6 +73,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public BaseResponse authenticateUser(String userNameOrTelOrMail, String password) {
+        System.out.println(userNameOrTelOrMail +"----"+ password);
         User user = userRepository.findByUsernameAndPassword(userNameOrTelOrMail, password);
         if (user != null) {
             return new BaseResponse(true,"findByUsernameAndPassword",user);
@@ -160,6 +162,11 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             return new BaseResponse(false, "Error: "+e.getMessage(),null);
         }
+    }
+
+    @Override
+    public void deleteUserById(String userId) {
+        userRepository.deleteByUserId(userId);
     }
 
 

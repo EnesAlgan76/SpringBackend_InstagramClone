@@ -66,4 +66,9 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
     @Transactional
     @Query("UPDATE User u SET u.followingCount = u.followingCount + 1 WHERE u.userId = :userId")
     void incrementFollowingCount(String userId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.followingCount = u.followingCount + 1 WHERE u.userId = :userId")
+    void deleteByUserId(String userId);
 }
