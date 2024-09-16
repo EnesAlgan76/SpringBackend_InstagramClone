@@ -57,14 +57,9 @@ public class User {
     @Column(name = "fcmToken")
     private String fcmToken;
 
-
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-//    @JsonIgnore
-//    private List<Post> postList;
-
-   @JsonIgnoreProperties("user")
-   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-   private List<Post> postList;
+    @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Post> postList;
 
     public List<Post> getPostList() {
         ConsolePrinter.printYellow("Post listesi getirildi");

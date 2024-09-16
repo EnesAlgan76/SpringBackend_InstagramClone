@@ -15,43 +15,36 @@ import jakarta.persistence.*;
 public class Like {
 
     @Id
-    @Column(name = "likeId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer likeId;
+    private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
-    private User user;
+    @Column(name = "userId")
+    private String userId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postId", referencedColumnName = "postId")
-    private Post post;
+    @Column(name = "postId")
+    private Integer postId;
 
-
-
-
-
-    public Integer getLikeId() {
-        return likeId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setLikeId(Integer likeId) {
-        this.likeId = likeId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public Post getPost() {
-        return post;
+    public Integer getPostId() {
+        return postId;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 }
