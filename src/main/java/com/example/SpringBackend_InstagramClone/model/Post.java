@@ -35,7 +35,7 @@ public class Post {
     private int likeCount;
 
     @Column(name = "creationDate")
-    private String creationDate;
+    private Long creationDate;
 
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -83,11 +83,11 @@ public class Post {
         this.content = content;
     }
 
-    public String getCreationDate() {
+    public Long getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Long creationDate) {
         this.creationDate = creationDate;
     }
 

@@ -10,6 +10,9 @@ import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
 import com.example.SpringBackend_InstagramClone.service.PostService;
 import com.example.SpringBackend_InstagramClone.utils.ConsolePrinter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -77,6 +80,34 @@ public class PostServiceImpl implements PostService {
             return new BaseResponse(false,"Error getAllPostsByUserId ", null);
         }
     }
+
+    @Override
+    public BaseResponse getUserPagedPosts(String userId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("creationDate").descending());
+        List<PostDTO> postDTOList;
+        try {
+            postDTOList = postRepository.getUserPagedPosts(userId, pageable);
+            return new BaseResponse(true, "All posts from user: " + userId, postDTOList);
+        } catch (Exception e) {
+            return new BaseResponse(false, "Error getAllPostsByUserId ", null);
+        }
+    }
+
+    @Override
+    public BaseResponse getPagedPostsFromFollowedUsers(String userId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("creationDate").descending());
+        List<PostHomePageDto> postDTOList;
+        try {
+            postDTOList = postRepository.getPagedPostsFromFollowedUsers(userId, pageable);
+            return new BaseResponse(true, "All posts from user: " + userId, postDTOList);
+        } catch (Exception e) {
+            return new BaseResponse(false, "Error getAllPostsByUserId ", null);
+        }
+    }
+
+
+
+
 
     @Override
     public BaseResponse getUserPostsHomePage(String userId) {

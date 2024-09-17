@@ -5,11 +5,11 @@ public class PostDTO {
     private String userId;
     private String content;
     private String explanation;
-    private String creationDate;
+    private Long creationDate;
     private int likeCount;
 
 
-    public PostDTO(int postId, String userId, String content, String explanation, String creationDate, int likeCount) {
+    public PostDTO(int postId, String userId, String content, String explanation, Long creationDate, int likeCount) {
         this.postId = postId;
         this.userId = userId;
         this.content = content;
@@ -50,11 +50,11 @@ public class PostDTO {
         this.explanation = explanation;
     }
 
-    public String getCreationDate() {
+    public Long getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Long creationDate) {
         this.creationDate = creationDate;
     }
 

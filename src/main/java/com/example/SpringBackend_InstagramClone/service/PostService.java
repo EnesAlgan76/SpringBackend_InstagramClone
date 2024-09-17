@@ -14,5 +14,9 @@ public interface PostService {
 
     BaseResponse getAllPostsByUserId(String userId);
 
+    BaseResponse getUserPagedPosts(String userId, int page, int size);
+
+    BaseResponse getPagedPostsFromFollowedUsers(String userId, int page, int size);
+
     BaseResponse getUserPostsHomePage(String userId);
 }

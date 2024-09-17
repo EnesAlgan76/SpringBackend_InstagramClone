@@ -1,7 +1,6 @@
 package com.example.SpringBackend_InstagramClone.controller;
 
 
-import com.example.SpringBackend_InstagramClone.dto.NotificationDTO;
 import com.example.SpringBackend_InstagramClone.dto.PostDTO;
 import com.example.SpringBackend_InstagramClone.model.Post;
 import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
@@ -44,6 +43,32 @@ public class PostController {
     @GetMapping("/allposts/{userId}")
     public ResponseEntity<BaseResponse> getAllPostsByUserId(@PathVariable String userId) {
         return new ResponseEntity<>(postService.getAllPostsByUserId(userId),HttpStatus.OK);
+    }
+
+    @GetMapping("pagedPosts")
+    public ResponseEntity<BaseResponse> getPagedPostsByUserId(
+            @RequestParam String userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
+        try {
+            BaseResponse response = postService.getUserPagedPosts(userId, page, size);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Error fetching posts", null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/pagedPostsFollowed")
+    public ResponseEntity<BaseResponse> getPagedPostsFromFollowedUsers(
+            @RequestParam String userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
+        try {
+            BaseResponse response = postService.getPagedPostsFromFollowedUsers(userId, page, size);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Error fetching followed users' posts", null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("getUserPostsHomePage/{userId}")

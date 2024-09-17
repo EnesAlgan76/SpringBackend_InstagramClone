@@ -18,4 +18,6 @@ public interface UserFollowerRepository extends JpaRepository<Follower,Integer> 
     @Query("SELECT f.followed.userId FROM Follower f WHERE f.follower.userId = :userId")
     List<String> getFollowedUserIds(String userId);
 
+
+
 }

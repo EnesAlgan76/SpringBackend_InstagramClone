@@ -3,6 +3,7 @@ package com.example.SpringBackend_InstagramClone.repository;
 import com.example.SpringBackend_InstagramClone.dto.PostHomePageDto;
 import com.example.SpringBackend_InstagramClone.dto.PostDTO;
 import com.example.SpringBackend_InstagramClone.model.Post;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -23,6 +24,17 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query("SELECT new com.example.SpringBackend_InstagramClone.dto.PostDTO(p.postId, p.user.userId, p.content, p.explanation, p.creationDate, p.likeCount) FROM Post p WHERE p.user.userId = :userId")
     List<PostDTO> getUserAllPost(String userId);
+
+    @Query("SELECT new com.example.SpringBackend_InstagramClone.dto.PostDTO(p.postId, p.user.userId, p.content, p.explanation, p.creationDate, p.likeCount) FROM Post p WHERE p.user.userId = :userId")
+    List<PostDTO> getUserPagedPosts(String userId, Pageable pageable);
+
+    @Query("SELECT new com.example.SpringBackend_InstagramClone.dto.PostHomePageDto(p.id, p.user.userId, p.user.fullName, p.user.profilePicture, p.content, p.creationDate, p.likeCount, p.explanation, p.user.userName) " +
+            "FROM Post p JOIN Follower f ON p.user.userId = f.followed.userId " +
+            "WHERE f.follower.userId = :userId " +
+            "ORDER BY p.creationDate DESC")
+    List<PostHomePageDto> getPagedPostsFromFollowedUsers(String userId, Pageable pageable);
+
+
 
 
     @Query("SELECT new com.example.SpringBackend_InstagramClone.dto.PostHomePageDto(p.id, p.user.userId, p.user.fullName, p.user.profilePicture, p.content, p.creationDate, p.likeCount, p.explanation, p.user.userName) FROM Post p WHERE p.user.userId = :userId")

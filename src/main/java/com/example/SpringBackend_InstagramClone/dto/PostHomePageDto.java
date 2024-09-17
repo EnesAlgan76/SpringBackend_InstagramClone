@@ -6,7 +6,7 @@ public class PostHomePageDto {
     private String userFullName;
     private String userProfileImage;
     private String content;
-    private String creationDate;
+    private Long creationDate;
     private int likeCount;
     private String postDescription;
     private String userName;
@@ -14,7 +14,7 @@ public class PostHomePageDto {
     public PostHomePageDto() {
     }
 
-    public PostHomePageDto(int postId, String userId, String userFullName, String userProfileImage, String content, String creationDate, int likeCount, String postDescription, String userName) {
+    public PostHomePageDto(int postId, String userId, String userFullName, String userProfileImage, String content, Long creationDate, int likeCount, String postDescription, String userName) {
         this.postId = postId;
         this.userId = userId;
         this.userFullName = userFullName;
@@ -67,11 +67,11 @@ public class PostHomePageDto {
         this.content = content;
     }
 
-    public String getCreationDate() {
+    public Long getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Long creationDate) {
         this.creationDate = creationDate;
     }
 
