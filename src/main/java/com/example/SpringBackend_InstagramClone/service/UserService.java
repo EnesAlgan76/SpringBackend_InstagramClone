@@ -37,4 +37,6 @@ public interface UserService {
 
 
     void deleteUserById(String userId);
+
+    BaseResponse updateUserProfile(String userName, String newFullName, String newUserName, String newBiography, String newSelectedImageUri);
 }

@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -167,6 +168,46 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(String userId) {
         userRepository.deleteByUserId(userId);
+    }
+
+    @Transactional
+    public BaseResponse updateUserProfile(String userName, String newFullName, String newUserName, String newBiography, String newSelectedImageUri) {
+        User user = userRepository.findByUserName(userName);
+
+        if (user == null) {
+            return new BaseResponse(false,"User not found",null);
+        }
+
+        if (newUserName != null) {
+            if (userRepository.findByUserName(newUserName) != null) {
+                return new BaseResponse(false,"Username already exists",null);
+            }
+            user.setUserName(newUserName);
+        }
+
+        if (newFullName != null) {
+            user.setFullName(newFullName);
+        }
+
+        if (newBiography != null) {
+            user.setBiography(newBiography);
+        }
+
+
+        if (newSelectedImageUri != null) {
+            user.setProfilePicture(newSelectedImageUri);
+        }
+        try {
+            userRepository.save(user);
+            return new BaseResponse(true,"User updated succesfully",null);
+        }catch (Exception e){
+            return new BaseResponse(false,"Error occoured",null);
+        }
+
+
+
+
+
     }
 
 

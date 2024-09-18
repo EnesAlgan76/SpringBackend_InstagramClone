@@ -122,27 +122,15 @@ public class UserController {
     }
 
 
+    @PutMapping("/updateProfile")
+    public ResponseEntity<BaseResponse> updateUserProfile(
+            @RequestParam String userName,
+            @RequestParam(required = false) String newFullName,
+            @RequestParam(required = false) String newUserName,
+            @RequestParam(required = false) String newBiography,
+            @RequestParam(required = false) String newSelectedImageUri) {
 
-
-
-
-
-
-
-
-
-    @PostMapping("/users00")
-    public ResponseEntity<List<User>> getUsersByFilter(@RequestBody List<FilterDTO> filterDTOList) {
-        return ResponseEntity.ok().body(userService.getUsersByFilter(filterDTOList));
-    }
-
-
-    @PostMapping("/users01")
-    public ResponseEntity<Page<User>> getUsersByFilterWithPaggination(
-            @RequestBody List<FilterDTO> filterDTOList,
-            @RequestParam int page,
-            @RequestParam int size) {
-        return ResponseEntity.ok().body(userService.getUsersByFilterWithPaggination(filterDTOList,page,size));
+        return new ResponseEntity<>(userService.updateUserProfile(userName, newFullName, newUserName, newBiography, newSelectedImageUri), HttpStatus.OK);
     }
 
 
