@@ -35,6 +35,7 @@ public class LikeService {
             like.setUserId(userId);
             like.setPostId(postId);
             likeRepository.save(like);
+            postRepository.incrementLikeCount(postId);
             return new BaseResponse(true, "Post liked successfully", null);
         }
     }
@@ -46,6 +47,7 @@ public class LikeService {
     public BaseResponse removeLike(String userId, Integer postId) {
         try {
             likeRepository.deleteByUserIdAndPostId(userId,postId);
+            postRepository.decrementLikeCount(postId);
             return new BaseResponse(true, "Like removed succesfully", null);
         }catch (Throwable e){
             return new BaseResponse(false, e.getMessage(), null);

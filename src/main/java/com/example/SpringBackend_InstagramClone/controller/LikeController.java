@@ -1,7 +1,9 @@
 package com.example.SpringBackend_InstagramClone.controller;
 
 import com.example.SpringBackend_InstagramClone.request_response.BaseResponse;
+import com.example.SpringBackend_InstagramClone.service.PostService;
 import com.example.SpringBackend_InstagramClone.serviceImpl.LikeService;
+import com.example.SpringBackend_InstagramClone.serviceImpl.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,9 @@ public class LikeController {
 
     @Autowired
     private LikeService likeService;
+
+    @Autowired
+    private PostServiceImpl postService;
 
     // Add like
     @PostMapping("/add")

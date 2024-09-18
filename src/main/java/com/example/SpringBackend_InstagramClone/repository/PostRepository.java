@@ -5,7 +5,9 @@ import com.example.SpringBackend_InstagramClone.dto.PostDTO;
 import com.example.SpringBackend_InstagramClone.model.Post;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -20,6 +22,14 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query("SELECT p FROM Post p WHERE p.postId = :id")
     PostDTO findPostById(Integer id);
+
+    @Modifying
+    @Query("UPDATE Post p SET p.likeCount = p.likeCount + 1 WHERE p.postId = :postId")
+    void incrementLikeCount(Integer postId);
+
+    @Modifying
+    @Query("UPDATE Post p SET p.likeCount = p.likeCount - 1 WHERE p.postId = :postId")
+    void decrementLikeCount(Integer postId);
 
 
     @Query("SELECT new com.example.SpringBackend_InstagramClone.dto.PostDTO(p.postId, p.user.userId, p.content, p.explanation, p.creationDate, p.likeCount) FROM Post p WHERE p.user.userId = :userId")
