@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/stories")
 public class StoryController {
@@ -23,7 +25,7 @@ public class StoryController {
     @GetMapping("/{userId}")
     public ResponseEntity<BaseResponse> getUserStories(@PathVariable String userId) {
         try {
-            UserStoriesDTO storyDTO = storyService.getUserStories(userId);
+            List<UserStoriesDTO> storyDTO = storyService.getStoriesOfFollowedUsers(userId);
             BaseResponse response = new BaseResponse(true, "User stories retrieved successfully.", storyDTO);
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
