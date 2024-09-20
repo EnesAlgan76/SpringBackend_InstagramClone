@@ -22,14 +22,12 @@ public class Story {
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
 
-    @Column(name = "story_image")
+    @Column(name = "storyImage")
     private String storyImage;
 
-    @Column(name = "story_date")
-    private String storyDate;
+    @Column(name = "creationDate")
+    private Long creationDate;
 
-    @Column(name = "storiescol")
-    private String storiescol;
 
     public Integer getStoryId() {
         return storyId;
@@ -55,19 +53,11 @@ public class Story {
         this.storyImage = storyImage;
     }
 
-    public String getStoryDate() {
-        return storyDate;
+    public Long getCreationDate() {
+        return creationDate;
     }
 
-    public void setStoryDate(String storyDate) {
-        this.storyDate = storyDate;
-    }
-
-    public String getStoriescol() {
-        return storiescol;
-    }
-
-    public void setStoriescol(String storiescol) {
-        this.storiescol = storiescol;
+    public void setCreationDate(Long creationDate) {
+        this.creationDate = creationDate;
     }
 }

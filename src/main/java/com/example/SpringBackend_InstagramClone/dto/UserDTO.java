@@ -7,7 +7,6 @@ public class UserDTO {
     private String userName;
     private String email;
     private String phoneNumber;
-    private String password;
     private String biography;
     private Integer followerCount;
     private Integer followingCount;
@@ -15,17 +14,17 @@ public class UserDTO {
     private String profilePicture;
     private String fcmToken;
 
-    public UserDTO() {
-    }
-
-    public UserDTO(Integer id, String userId, String fullName, String userName, String email, String phoneNumber, String password, String biography, Integer followerCount, Integer followingCount, Integer postCount, String profilePicture, String fcmToken) {
+    // Constructor
+    public UserDTO(Integer id, String userId, String fullName, String userName,
+                   String email, String phoneNumber, String biography,
+                   Integer followerCount, Integer followingCount,
+                   Integer postCount, String profilePicture, String fcmToken) {
         this.id = id;
         this.userId = userId;
         this.fullName = fullName;
         this.userName = userName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.password = password;
         this.biography = biography;
         this.followerCount = followerCount;
         this.followingCount = followingCount;
@@ -34,7 +33,9 @@ public class UserDTO {
         this.fcmToken = fcmToken;
     }
 
+    public UserDTO() {
 
+    }
 
     public Integer getId() {
         return id;
@@ -62,14 +63,6 @@ public class UserDTO {
 
     public String getUserName() {
         return userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setUserName(String userName) {
@@ -140,3 +133,4 @@ public class UserDTO {
         this.fcmToken = fcmToken;
     }
 }
+

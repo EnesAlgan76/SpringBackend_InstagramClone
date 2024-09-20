@@ -57,18 +57,31 @@ public class User {
     @Column(name = "fcmToken")
     private String fcmToken;
 
-    @JsonIgnoreProperties("user")
+   /* @JsonIgnoreProperties("user")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Post> postList;
 
+    @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Story> stories;
+
+
     public List<Post> getPostList() {
-        ConsolePrinter.printYellow("Post listesi getirildi");
         return postList;
     }
 
     public void setPostList(List<Post> postList) {
         this.postList = postList;
     }
+
+    public List<Story> getStories() {
+        ConsolePrinter.printYellow("Story listesi getirildi");
+        return stories;
+    }
+
+    public void setStories(List<Story> stories) {
+        this.stories = stories;
+    }*/
 
     public Integer getId() {
         return id;
