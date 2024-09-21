@@ -16,10 +16,14 @@ public interface StoryRepository extends JpaRepository<Story, Integer> {
 
 
     @Query("SELECT s " +
-            "FROM Story s JOIN Follower f ON s.user.userId = f.followed.userId " +
-            "WHERE f.follower.userId = :userId " +
+            "FROM Story s " +
+            "WHERE s.user.userId = :userId " +  // Include user's own stories
+            "OR s.user.userId IN (SELECT f.followed.userId " +
+            "FROM Follower f " +
+            "WHERE f.follower.userId = :userId) " +  // Include stories of followed users
             "ORDER BY s.creationDate DESC")
     List<Story> getStoriesOfFollowedUsers(@Param("userId") String userId);
+
 
 
 
